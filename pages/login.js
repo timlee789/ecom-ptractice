@@ -10,7 +10,7 @@ export default function LoginScreen() {
         formState: { errors },
     } = useForm();
     const submitHandler = ({email, password}) => {
-
+        console.log(email, password)
     }
       return (
     <Layout title="Login">
@@ -20,7 +20,7 @@ export default function LoginScreen() {
                 <label htmlFor='email'>Email</label>
                 <input type="email" {...register('email', {required: 'Please enter email', 
                 pattern: {
-                    value: /^[a-zA-Z0-9_.+-]+ @[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
+                    value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z-_9]+.[a-zA-Z0-9-.]+$/i,                
                     message: 'Please enter valid email'
                 }})} className="w-full" id="email" autoFocus ></input>
             </div>
