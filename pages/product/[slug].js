@@ -19,7 +19,7 @@ export default function ProductScreen({product}) {
     if(!product) {
         return <Layout title="Product Not Found">Product Not Found</Layout>
     }
-    const addToCartHandler = () => {
+    const addToCartHandler = async() => {
         const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
         const quantity = existItem ? existItem.quantity + 1 : 1;
         const {data} = await axios.get(`/api/products/${product._id}`)
