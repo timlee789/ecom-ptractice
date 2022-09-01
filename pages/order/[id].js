@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
 import Layout from "../../components/Layout";
 import getError from "../../utils/error";
-import {PayPalButtons} from '@paypal/react-paypal-js';
+import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js';
 import { toast } from 'react-toastify';
+import { useSession } from 'next-auth/react';
 
 function reducer(state, action) {
     switch (action.type) {
@@ -31,11 +32,12 @@ function reducer(state, action) {
 }
 
 function OrderScreen() {
+    const { data: session} = useSession();
     //order/:id
     const [{isPending}, paypalDispatch] = usePayPalScriptReducer();
     const {query} = useRouter();
     const orderId = query.id;
-    const [{ loading, error, order, suceessPay, loadingPay, }, dispatch ] = useReducer 
+    const [{ loading, error, order, successPay, loadingPay, }, dispatch ] = useReducer 
           (reducer, {loading: true, order: {}, error: '',});
     useEffect(() => {
         const fetchOrder = async () => {
@@ -97,7 +99,7 @@ function OrderScreen() {
     }
 
     function onApprove(data, actions) {
-        ruturn actions.order.capture().then(async function(details) {
+        return actions.order.capture().then(async function(details) {
             try {
                 dispatch({type: 'PAY_REQUEST'});
                 const {data} = await axios.put(
