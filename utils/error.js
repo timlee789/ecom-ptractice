@@ -3,4 +3,4 @@ const getError = (err) =>
     ? err.response.data.message
     : err.message;
 
-export default getError 
+export  {getError} 
