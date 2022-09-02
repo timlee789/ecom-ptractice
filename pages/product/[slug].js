@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {useRouter} from 'next/router'
 import Layout from '../../components/Layout'
 import Link from 'next/link';
@@ -10,6 +10,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 export default function ProductScreen({product}) {
+    
     const { state, dispatch} = useContext(Store);
     const router = useRouter();
     // const {query} = useRouter();
@@ -25,7 +26,21 @@ export default function ProductScreen({product}) {
         if(data.countInStock < quantity) {
             return toast.error('Sorry, Product is out of stock');
         }
-        dispatch({type: 'CART_ADD_ITEM', payload: { ...product, quantity }})
+        dispatch({type: 'CART_ADD_ITEM', payload: { ...product, quantity, selected }})
+    }
+    const options = [
+        {value: '', text: ' --Chose Your Size--'},
+        {value: 'xsmall', text: 'XSmall'},
+        {value: 'small', text: 'Small'},
+        {value: 'medium', text: 'Medium'},
+        {value: 'large', text: 'Large'},
+        {value: 'xlarge', text: 'XLarge'},
+        {value: '2xlarge', text: '2XLarge'},
+    ];
+    const [ selected, setSelected] = useState(options[0].value);
+    const  handleChange = (event) => {
+        console.log(event.target.value)
+        setSelected(event.target.value);
     }
   return (
     <Layout title={product.name}>
@@ -38,12 +53,22 @@ export default function ProductScreen({product}) {
                 </div>
                 <div>
                     <ul>
-                        <li><h1 className='text-lg'>{product.name}</h1></li>
+                        <li><h1 className='text-2xl mb-5'>{product.name}</h1></li>
+                        <li>{product.rating} of { product.numReviews} reviews</li>
                         <li>Category: {product.category}</li>    
                         <li>Brand: {product.brand}</li>
-                        <li>{product.rating} of { product.numReviews} reviews</li>
                         <li>description: {product.description}</li>
+                        <li>
+                        </li>
                     </ul>
+               
+                  <select value={selected} onChange={handleChange} className='my-10'>
+                    {options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.text}
+                        </option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                     <div className='card p-5'>
