@@ -1,4 +1,4 @@
-import User from '../../../../models/User';
+import User from '../../../../models/Users';
 import db from '../../../../utils/db';
 import { getSession } from 'next-auth/react';
 
