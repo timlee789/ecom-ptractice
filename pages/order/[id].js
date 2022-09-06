@@ -1,5 +1,5 @@
 import React from 'react';
-import axios, { Axios } from "axios";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -32,13 +32,12 @@ function reducer(state, action) {
 }
 
 function OrderScreen() {
-    const { data: session} = useSession();
+    //const { data: session} = useSession();
     //order/:id
     const [{isPending}, paypalDispatch] = usePayPalScriptReducer();
     const {query} = useRouter();
     const orderId = query.id;
-    const [{ loading, error, order, successPay, loadingPay, }, dispatch ] = useReducer 
-          (reducer, {loading: true, order: {}, error: '',});
+    const [{ loading,  order, successPay, loadingPay, }, dispatch ] = useReducer(reducer, {loading: true, order: {}, error: '',});
     useEffect(() => {
         const fetchOrder = async () => {
                 try {

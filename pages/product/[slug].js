@@ -9,7 +9,7 @@ import Product from '../../models/Product';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { v4 as uuid } from 'uuid';
-import { ReactDOM } from 'react-dom';
+//import { ReactDOM } from 'react-dom';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
@@ -17,7 +17,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 export default function ProductScreen({product}) {
     const unique_id = uuid()
     const { state, dispatch} = useContext(Store);
-    const router = useRouter();
+    //const router = useRouter();
     // const {query} = useRouter();
     // const {slug} = query;
     // const product = data.products.find((x) => x.slug === slug);
@@ -43,7 +43,7 @@ export default function ProductScreen({product}) {
         {value: 'xlarge', text: 'XLarge'},
         {value: '2xlarge', text: '2XLarge'},
     ];
-    const [ size, setSize] = useState(options[0].value);
+    const [ size, setSize] = useState('');
     const  handleChange = (event) => {
         console.log(event.target.value)
         setSize(event.target.value);

@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import React, { useState, useContext, useEffect } from 'react'
-import { set } from 'react-hook-form';
+//import { set } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import CheckoutWizard from '../components/CheckoutWizard'
 import Layout from '../components/Layout'

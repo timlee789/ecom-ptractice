@@ -1,12 +1,12 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import { Store } from '../utils/Store';
 import Image from 'next/image';
 import Layout from '../components/Layout';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+// import axios from 'axios';
+// import { toast } from 'react-toastify';
 
 function CartScreen() {
     const router = useRouter();
@@ -17,15 +17,15 @@ function CartScreen() {
      
       dispatch({type: 'CART_REMOVE_ITEM', payload:{ unique_id}});
     };
-    const updateCartHandler = async (item, qty, unique_id) => {
-      const quantity = Number(qty);
-      const { data} = await axios.get(`/api/products/${item._id}`);
-      if (data.countInStock < quantity) {
-        return toast.error('Sorry, Product is out of stock');
-      }
-      dispatch({type: 'CART_ADD_ITEM', payload:{...item, quantity, unique_id}})
-      toast.success('Product updated in the cart')
-    }
+    // const updateCartHandler = async (item, qty, unique_id) => {
+    //   const quantity = Number(qty);
+    //   const { data} = await axios.get(`/api/products/${item._id}`);
+    //   if (data.countInStock < quantity) {
+    //     return toast.error('Sorry, Product is out of stock');
+    //   }
+    //   dispatch({type: 'CART_ADD_ITEM', payload:{...item, quantity, unique_id}})
+    //   toast.success('Product updated in the cart')
+    // }
    
   return (
     <Layout title='Shopping Cart'>

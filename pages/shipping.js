@@ -13,7 +13,6 @@ export default function ShippingScreen() {
         register,
         formState:{errors},
         setValue,
-        getValue,
     } = useForm();
     const  { state, dispatch } = useContext(Store)
     const { cart } = state;
