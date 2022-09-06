@@ -16,6 +16,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 export default function ProductScreen({product}) {
     const unique_id = uuid()
     const { state, dispatch} = useContext(Store);
+    const [ size, setSize] = useState('');
     //const router = useRouter();
     // const {query} = useRouter();
     // const {slug} = query;
@@ -23,17 +24,7 @@ export default function ProductScreen({product}) {
     if(!product) {
         return <Layout title="Product Not Found">Product Not Found</Layout>
     }
-    const options = [
-        {value: '', text: ' --Chose Your Size--'},
-        {value: 'xsmall', text: 'XSmall'},
-        {value: 'small', text: 'Small'},
-        {value: 'medium', text: 'Medium'},
-        {value: 'large', text: 'Large'},
-        {value: 'xlarge', text: 'XLarge'},
-        {value: '2xlarge', text: '2XLarge'},
-    ];
-    const [ size, setSize] = useState('');
-
+ 
     const addToCartHandler = async() => {
         const existItem = state.cart.cartItems.find((x) => x.slug && x.size === product.slug && product.seleted);
         const quantity = existItem ? existItem.quantity + 1 : 1;
@@ -44,7 +35,15 @@ export default function ProductScreen({product}) {
         console.log(unique_id)
         dispatch({type: 'CART_ADD_ITEM', payload: { ...product, quantity, size, unique_id }})
     }
-   
+    const options = [
+        {value: '', text: ' --Chose Your Size--'},
+        {value: 'xsmall', text: 'XSmall'},
+        {value: 'small', text: 'Small'},
+        {value: 'medium', text: 'Medium'},
+        {value: 'large', text: 'Large'},
+        {value: 'xlarge', text: 'XLarge'},
+        {value: '2xlarge', text: '2XLarge'},
+    ];
     const  handleChange = (event) => {
         setSize(event.target.value);
     }
