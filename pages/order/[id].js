@@ -8,7 +8,6 @@ import Layout from "../../components/Layout";
 import getError from "../../utils/error";
 import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js';
 import { toast } from 'react-toastify';
-import { useSession } from 'next-auth/react';
 
 function reducer(state, action) {
     switch (action.type) {

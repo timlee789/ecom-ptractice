@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import {useRouter} from 'next/router'
 import Layout from '../../components/Layout'
 import Link from 'next/link';
 import Image from 'next/image';
@@ -24,16 +23,6 @@ export default function ProductScreen({product}) {
     if(!product) {
         return <Layout title="Product Not Found">Product Not Found</Layout>
     }
-    const addToCartHandler = async() => {
-        const existItem = state.cart.cartItems.find((x) => x.slug && x.size === product.slug && product.seleted);
-        const quantity = existItem ? existItem.quantity + 1 : 1;
-        const {data} = await axios.get(`/api/products/${product._id}`)
-        if(data.countInStock < quantity) {
-            return toast.error('Sorry, Product is out of stock');
-        }
-        console.log(unique_id)
-        dispatch({type: 'CART_ADD_ITEM', payload: { ...product, quantity, size, unique_id }})
-    }
     const options = [
         {value: '', text: ' --Chose Your Size--'},
         {value: 'xsmall', text: 'XSmall'},
@@ -44,11 +33,22 @@ export default function ProductScreen({product}) {
         {value: '2xlarge', text: '2XLarge'},
     ];
     const [ size, setSize] = useState('');
+
+    const addToCartHandler = async() => {
+        const existItem = state.cart.cartItems.find((x) => x.slug && x.size === product.slug && product.seleted);
+        const quantity = existItem ? existItem.quantity + 1 : 1;
+        const {data} = await axios.get(`/api/products/${product._id}`)
+        if(data.countInStock < quantity) {
+            return toast.error('Sorry, Product is out of stock');
+        }
+        console.log(unique_id)
+        dispatch({type: 'CART_ADD_ITEM', payload: { ...product, quantity, size, unique_id }})
+    }
+   
     const  handleChange = (event) => {
-        console.log(event.target.value)
         setSize(event.target.value);
     }
-    const selectSize = (e) => {
+    const selectSize = () => {
         return toast.error('Select Size')
     }
   return (
