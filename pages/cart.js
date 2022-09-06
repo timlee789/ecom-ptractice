@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import { Store } from '../utils/Store';
 import Image from 'next/image';
 import Layout from '../components/Layout';
@@ -12,18 +12,21 @@ function CartScreen() {
     const router = useRouter();
     const { state, dispatch } = useContext(Store)
     const { cart: { cartItems }} = state;
-    const removeItemHandler = (item) => {
-      dispatch({type: 'CART_REMOVE_ITEM', payload: item});
+   
+    const removeItemHandler = (unique_id) => {
+     
+      dispatch({type: 'CART_REMOVE_ITEM', payload:{ unique_id}});
     };
-    const updateCartHandler = async (item, qty) => {
+    const updateCartHandler = async (item, qty, unique_id) => {
       const quantity = Number(qty);
       const { data} = await axios.get(`/api/products/${item._id}`);
       if (data.countInStock < quantity) {
         return toast.error('Sorry, Product is out of stock');
       }
-      dispatch({type: 'CART_ADD_ITEM', payload:{...item, quantity}})
+      dispatch({type: 'CART_ADD_ITEM', payload:{...item, quantity, unique_id}})
       toast.success('Product updated in the cart')
     }
+   
   return (
     <Layout title='Shopping Cart'>
       <h1 className='mb-4 text-xl'>Shopping Cart</h1>
@@ -37,6 +40,7 @@ function CartScreen() {
                 <thead className='border-b'>
                   <tr>
                     <th className='px-5 text-left'>Item</th>
+                    <th className='px-5 text-left'>Size</th>
                     <th className='p-5 text-right'>Quantity</th>
                     <th className='p-5 text-right'>Price</th>
                     <th className='p-5'>Action</th>
@@ -53,16 +57,20 @@ function CartScreen() {
                           </a>
                         </Link>
                       </td>
+                      <td>
+                        {item.size}
+                      </td>
                       <td className='p-5 text-right'>
-                          <select value={item.quantity} onChange={(e) => updateCartHandler(item, e.target.value)}>
+                        {item.quantity}
+                          {/* <select value={item.quantity} onChange={(e) => updateCartHandler(item, e.target.value, item.unique_id)}>
                               { [...Array(item.countInStock).keys()].map((x) => (
                                 <option key={x + 1} value={x + 1}>{x + 1}</option>
                               ))}
-                          </select>  
+                          </select>   */}
                       </td>
                       <td className='p-5 text-right'>{item.price}</td>
                       <td className='p-5 text-center'>
-                        <button onClick={() => removeItemHandler(item)}>Delete</button>
+                        <button onClick={() => removeItemHandler(item.unique_id)} className="bg-red-600 px-7 py-1 text-white">Delete</button>
                       </td>
                     </tr>
                   ))}

@@ -8,9 +8,14 @@ import db from '../../utils/db';
 import Product from '../../models/Product';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { v4 as uuid } from 'uuid';
+import { ReactDOM } from 'react-dom';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
+//ReactDOM.render(<DemoCarousel />, document.querySelector('.demo-carousel'));
 export default function ProductScreen({product}) {
-    
+    const unique_id = uuid()
     const { state, dispatch} = useContext(Store);
     const router = useRouter();
     // const {query} = useRouter();
@@ -20,13 +25,14 @@ export default function ProductScreen({product}) {
         return <Layout title="Product Not Found">Product Not Found</Layout>
     }
     const addToCartHandler = async() => {
-        const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
+        const existItem = state.cart.cartItems.find((x) => x.slug && x.size === product.slug && product.seleted);
         const quantity = existItem ? existItem.quantity + 1 : 1;
         const {data} = await axios.get(`/api/products/${product._id}`)
         if(data.countInStock < quantity) {
             return toast.error('Sorry, Product is out of stock');
         }
-        dispatch({type: 'CART_ADD_ITEM', payload: { ...product, quantity, selected }})
+        console.log(unique_id)
+        dispatch({type: 'CART_ADD_ITEM', payload: { ...product, quantity, size, unique_id }})
     }
     const options = [
         {value: '', text: ' --Chose Your Size--'},
@@ -37,10 +43,13 @@ export default function ProductScreen({product}) {
         {value: 'xlarge', text: 'XLarge'},
         {value: '2xlarge', text: '2XLarge'},
     ];
-    const [ selected, setSelected] = useState(options[0].value);
+    const [ size, setSize] = useState(options[0].value);
     const  handleChange = (event) => {
         console.log(event.target.value)
-        setSelected(event.target.value);
+        setSize(event.target.value);
+    }
+    const selectSize = (e) => {
+        return toast.error('Select Size')
     }
   return (
     <Layout title={product.name}>
@@ -49,7 +58,49 @@ export default function ProductScreen({product}) {
         </div>
         <div className='grid md:grid-cols-4 md:gap-3'>
                 <div className='md:col-span-2'>
-                        <Image src={product.image} alt={product.name} width={640} height={800} Layout='responsive'></Image>
+                <Carousel>
+                <div>
+                    <Image src={product.image} alt={product.name} width={640} height={800} layout='responsive'/>
+                    <p className="legend">Legend 1</p>
+                </div>
+                <div>
+                    <Image src={product.image2} alt={product.name} width={640} height={800} layout='responsive'/>
+                    <p className="legend">Legend 2</p>
+                </div>
+                <div>
+                    <Image src={product.image3} alt={product.name} width={640} height={800} layout='responsive'/>
+                    <p className="legend">Legend 3</p>
+                </div>
+                <div>
+                    <Image src={product.image4} alt={product.name} width={640} height={800} layout='responsive'/>
+                    <p className="legend">Legend 3</p>
+                </div>
+                <div>
+                    <Image src={product.image5} alt={product.name} width={640} height={800} layout='responsive'/>
+                    <p className="legend">Legend 3</p>
+                </div>
+                <div>
+                    <Image src={product.image6} alt={product.name} width={640} height={800} layout='responsive'/>
+                    <p className="legend">Legend 3</p>
+                </div>
+                <div>
+                    <Image src={product.image7} alt={product.name} width={640} height={800} layout='responsive'/>
+                    <p className="legend">Legend 3</p>
+                </div>
+                <div>
+                    <Image src={product.image8} alt={product.name} width={640} height={800} layout='responsive'/>
+                    <p className="legend">Legend 3</p>
+                </div>
+                <div>
+                    <Image src={product.image9} alt={product.name} width={640} height={800} layout='responsive'/>
+                    <p className="legend">Legend 3</p>
+                </div>
+                <div>
+                    <Image src={product.image10} alt={product.name} width={640} height={800} layout='responsive'/>
+                    <p className="legend">Legend 3</p>
+                </div>
+            </Carousel>
+                       
                 </div>
                 <div>
                     <ul>
@@ -62,7 +113,7 @@ export default function ProductScreen({product}) {
                         </li>
                     </ul>
                
-                  <select value={selected} onChange={handleChange} className='my-10'>
+                  <select value={size} onChange={handleChange} className='my-10'>
                     {options.map((option) => (
                         <option key={option.value} value={option.value}>
                             {option.text}
@@ -80,7 +131,7 @@ export default function ProductScreen({product}) {
                             <div>Status</div>
                             <div>{product.countInStock > 0 ? 'In Sotck' : 'Unavailable'}</div>
                         </div>
-                        <button className='primary-button w-full' onClick={addToCartHandler}>Add to Cart</button>
+                        <button className='primary-button w-full' onClick={size ? addToCartHandler : selectSize}>Add to Cart</button>
                     </div>
                 </div>
         </div>

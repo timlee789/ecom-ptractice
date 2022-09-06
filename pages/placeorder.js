@@ -27,6 +27,7 @@ export default function PlaceOrderScreen() {
         }
     }, [paymentMethod, router])
     const [loading, setLoading] = useState(false);
+
     const placeOrderHandler = async() => {
         try {
             setLoading(true);
@@ -85,6 +86,7 @@ export default function PlaceOrderScreen() {
                                 <thead className='border-b'>
                                     <tr>
                                         <th className='px-5 text-left'>Item</th>
+                                        <th className='px-5 text-left'>Size</th>
                                         <th className='px-5 text-right'>Quantity</th>
                                         <th className='px-5 text-right'>Price</th>
                                         <th className='px-5 text-right'>Subtotal</th>
@@ -107,6 +109,7 @@ export default function PlaceOrderScreen() {
                                                     </a>
                                                 </Link>
                                             </td>
+                                            <td className='p-5 text-left'>{item.size}</td>
                                             <td className='p-5 text-right'>{item.quantity}</td>
                                             <td className='p-5 text-right'>{item.price}</td>
                                             <td className='p-5 text-right'>{item.quantity * item.price}</td>

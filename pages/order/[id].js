@@ -142,7 +142,7 @@ function OrderScreen() {
                        <h2 className="mb-2 text-lg">Payment Method</h2>
                             <div>{paymentMethod}</div>
                             {isPaid ? (
-                                <div className="alert-success">Paid at {apidAt} </div>
+                                <div className="alert-success">Paid at {paidAt} </div>
                             ) : (
                                 <div className="alert-error">Not Paid</div>
                             )}
@@ -153,6 +153,7 @@ function OrderScreen() {
                                 <thead className="border-b">
                                     <tr>
                                         <th className="px-5 text-left">Item</th>
+                                        <th className="px-5 text-left">Size</th>
                                         <th className="p-5 text-right">Quantity</th>
                                         <th className="p-5 text-right">Price</th>
                                         <th className="p-5 text-right">Subtotal</th>
@@ -174,6 +175,7 @@ function OrderScreen() {
                                                     </a>
                                                 </Link>
                                             </td>
+                                            <td className="p-5 text-left">{item.size}</td>
                                             <td className="p-5 text-right">{item.quantity}</td>
                                             <td className="p-5 text-right">${item.price}</td>
                                             <td className="p-5 text-right">${item.quantity * item.price}</td>

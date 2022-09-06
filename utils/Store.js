@@ -14,18 +14,20 @@ function reducer(state, action) {
         case 'CART_ADD_ITEM' : {
                 const newItem = action.payload;
                 const existItem = state.cart.cartItems.find(
-                    (item) => item.slug === newItem.slug
+                    (item) => item.slug && item.unique_id === newItem.slug && newItem.unique_id
                 );
                 const cartItems = existItem
-                ? state.cart.cartItems.map((item) => item.name === existItem.name ? newItem : item)
+                ? state.cart.cartItems.map((item) => 
+                item.name  === existItem.name ? newItem : item)
                 : [...state.cart.cartItems, newItem];
                 Cookies.set('cart' , JSON.stringify({ ...state.cart, cartItems}));
                 return { ...state, cart: { ...state.cart, cartItems }};
         }
         case 'CART_REMOVE_ITEM' : {
                 const cartItems = state.cart.cartItems.filter(
-                    (item) => item.slug !== action.payload.slug
+                    (item) => item.unique_id !== action.payload.unique_id 
                 );
+               
                 Cookies.set('set', JSON.stringify({ ...state.cart, cartItems }));
                 return { ...state, cart: { ...state.cart, cartItems }}
                 }
