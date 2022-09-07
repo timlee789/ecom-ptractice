@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuid } from 'uuid';
 //import { ReactDOM } from 'react-dom';
 import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader;
 
 //ReactDOM.render(<DemoCarousel />, document.querySelector('.demo-carousel'));
 export default function ProductScreen({product}) {
@@ -57,57 +57,36 @@ export default function ProductScreen({product}) {
         </div>
         <div className='grid md:grid-cols-4 md:gap-3'>
                 <div className='md:col-span-2'>
-                <Carousel>
+         
+            {<Carousel showArrows={true} showThumbs={true}>
                 <div>
-                    <Image src={product.image} alt={product.name} width={640} height={800} layout='responsive'/>
-                    <p className="legend">Legend 1</p>
+                    <img src={product.image} alt={product.name} width={640} height={800} layout='responsive'/>
                 </div>
                 <div>
-                    <Image src={product.image2} alt={product.name} width={640} height={800} layout='responsive'/>
-                    <p className="legend">Legend 2</p>
+                    <img src={product.image2} alt={product.name} width={640} height={800} layout='responsive'/>
                 </div>
                 <div>
-                    <Image src={product.image3} alt={product.name} width={640} height={800} layout='responsive'/>
-                    <p className="legend">Legend 3</p>
+                    <img src={product.image3} alt={product.name} width={640} height={800} layout='responsive'/>
                 </div>
                 <div>
-                    <Image src={product.image4} alt={product.name} width={640} height={800} layout='responsive'/>
-                    <p className="legend">Legend 3</p>
+                    <img src={product.image4} alt={product.name} width={640} height={800} layout='responsive'/>
                 </div>
                 <div>
-                    <Image src={product.image5} alt={product.name} width={640} height={800} layout='responsive'/>
-                    <p className="legend">Legend 3</p>
+                    <img src={product.image5} alt={product.name} width={640} height={800} layout='responsive'/>
                 </div>
-                <div>
-                    <Image src={product.image6} alt={product.name} width={640} height={800} layout='responsive'/>
-                    <p className="legend">Legend 3</p>
-                </div>
-                <div>
-                    <Image src={product.image7} alt={product.name} width={640} height={800} layout='responsive'/>
-                    <p className="legend">Legend 3</p>
-                </div>
-                <div>
-                    <Image src={product.image8} alt={product.name} width={640} height={800} layout='responsive'/>
-                    <p className="legend">Legend 3</p>
-                </div>
-                <div>
-                    <Image src={product.image9} alt={product.name} width={640} height={800} layout='responsive'/>
-                    <p className="legend">Legend 3</p>
-                </div>
-                <div>
-                    <Image src={product.image10} alt={product.name} width={640} height={800} layout='responsive'/>
-                    <p className="legend">Legend 3</p>
-                </div>
-            </Carousel>
+               
+                
+               
+            </Carousel>}
                        
                 </div>
-                <div>
+                <div className='mx-auto'>
                     <ul>
                         <li><h1 className='text-2xl mb-5'>{product.name}</h1></li>
-                        <li>{product.rating} of { product.numReviews} reviews</li>
-                        <li>Category: {product.category}</li>    
-                        <li>Brand: {product.brand}</li>
-                        <li>description: {product.description}</li>
+                        <li className='text-lg mb-2'>{product.rating} of { product.numReviews} reviews</li>
+                        <li className='text-lg mb-2'>Category: {product.category}</li>    
+                        <li className='text-lg mb-2'>Brand: {product.brand}</li>
+                        <li className='text-lg mb-2'>description: {product.description}</li>
                         <li>
                         </li>
                     </ul>
