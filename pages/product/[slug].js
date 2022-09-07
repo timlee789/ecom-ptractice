@@ -35,17 +35,10 @@ export default function ProductScreen({product}) {
         console.log(unique_id)
         dispatch({type: 'CART_ADD_ITEM', payload: { ...product, quantity, size, unique_id }})
     }
-    const options = [
-        {value: '', text: ' --Chose Your Size--'},
-        {value: 'xsmall', text: 'XSmall'},
-        {value: 'small', text: 'Small'},
-        {value: 'medium', text: 'Medium'},
-        {value: 'large', text: 'Large'},
-        {value: 'xlarge', text: 'XLarge'},
-        {value: '2xlarge', text: '2XLarge'},
-    ];
+
     const  handleChange = (event) => {
         setSize(event.target.value);
+        console.log(event.target.value)
     }
     const selectSize = () => {
         return toast.error('Select Size')
@@ -91,13 +84,11 @@ export default function ProductScreen({product}) {
                         </li>
                     </ul>
                
-                  <select value={size} onChange={handleChange} className='my-10'>
-                    {options.map((option) => (
-                        <option key={option.value} value={option.value}>
-                            {option.text}
-                        </option>
+                  <form value={size} onChange={handleChange} className='my-10'>
+                    {product.size.map((option) => (
+                        <input type='button' name='size' value={option} onClick={handleChange}  className='m-2 bg-gray-300'/>
                     ))}
-                  </select>
+                  </form>
                 </div>
                 <div>
                     <div className='card p-5'>

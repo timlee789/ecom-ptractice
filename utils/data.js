@@ -19,7 +19,7 @@ const data = {
     {
       name: 'Free Shirt',
       slug: 'free-shirt',
-      size: 'x-small, smallm mediul, large, X-large, 2X-large',
+      size:[ 'X-small', 'small', 'medium', 'large','X-large', 'XX-large',],
       category: 'Shirts',
       image: '/images/3xghana12.jpg',
       image2: '/images/3xghana12.jpg',
@@ -41,7 +41,7 @@ const data = {
     {
       name: 'Fit Shirt',
       slug: 'fit-shirt',
-      size: 'x-small, smallm mediul, large, X-large, 2X-large',
+      size:[ 'X-small', 'small', 'medium', 'large','X-large', 'XX-large',],
       category: 'Shirts',
       image: '/images/softjumbo1.jpg',
       image2: '/images/3xghana12.jpg',
@@ -63,7 +63,7 @@ const data = {
     {
       name: 'Slim Shirt',
       slug: 'slim-shirt',
-      size: 'x-small, smallm mediul, large, X-large, 2X-large',
+      size:[ 'X-small', 'small', 'medium', 'large','X-large', 'XX-large',],
       category: 'Shirts',
       image: '/images/softjumbo2.jpg',
       image2: '/images/3xghana12.jpg',
@@ -85,7 +85,7 @@ const data = {
     {
       name: 'Golf Pants',
       slug: 'golf-pants',
-      size: 'x-small, smallm mediul, large, X-large, 2X-large',
+      size:[ 'X-small', 'small', 'medium', 'large','X-large', 'XX-large',],
       category: 'Pants',
       image: '/images/softjumbo3.jpg',
       image2: '/images/3xghana12.jpg',
@@ -107,7 +107,7 @@ const data = {
     {
       name: 'Fit Pants',
       slug: 'fit-pants',
-      size: 'x-small, smallm mediul, large, X-large, 2X-large',
+      size:[ 'X-small', 'small', 'medium', 'large','X-large', 'XX-large',],
       category: 'Pants',
       image: '/images/softjumbo4.jpg',
       image2: '/images/3xghana12.jpg',
@@ -129,7 +129,7 @@ const data = {
     {
       name: 'Classic Pants',
       slug: 'classic-pants',
-      size: 'x-small, smallm mediul, large, X-large, 2X-large',
+      size:[ 'X-small', 'small', 'medium', 'large','X-large', 'XX-large',],
       category: 'Pants',
       image: '/images/softjumbo5.jpg',
       image2: '/images/3xghana12.jpg',
