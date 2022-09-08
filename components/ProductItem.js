@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from 'next/image'
 
 
-export default function ProductItem({product, addToCartHandler}) {
+export default function ProductItem({product}) {
    
   return (
     <div className='card'>

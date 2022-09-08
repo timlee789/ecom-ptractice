@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Layout from '../../components/Layout'
 import Link from 'next/link';
-import Image from 'next/image';
 import { Store } from '../../utils/Store';
 import db from '../../utils/db';
 import Product from '../../models/Product';
@@ -86,7 +85,12 @@ export default function ProductScreen({product}) {
                
                   <form value={size} onChange={handleChange} className='my-10'>
                     {product.size.map((option) => (
-                        <input type='button' name='size' value={option} onClick={handleChange}  className='m-2 bg-gray-300'/>
+                        <input type='button' 
+                               key={option}
+                               name='size' 
+                               value={option} 
+                               onClick={handleChange}  
+                               className='m-2 bg-gray-300'/>
                     ))}
                   </form>
                 </div>
